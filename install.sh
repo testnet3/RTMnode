@@ -13,11 +13,12 @@ COIN_TX='raptoreum-tx'
 COIN_PATH='/usr/local/bin'
 USERNAME='$(whoami)'
 START_QT_ANS=""
-
+echo -e " 
+echo -e " 
 echo -e "             Based on Raptoreum node install script by dk808 from AltTank"
-echo -e "             Smartnode healthcheck by Delgon"
+echo -e "                             Smartnode healthcheck by Delgon"
 echo -e ""
-echo -e "             tRTM Node setup starting, press [CTRL-C] to cancel."
+echo -e "                    tRTM Node setup starting, press [CTRL-C] to cancel."
 sleep 5
 if [ "$USERNAME" = "root" ]; then
   echo -e "You are currently logged in as root, please switch to a sudo user."
@@ -50,7 +51,7 @@ smartnodeblsprivkey=""
 function create_conf() {
   if [[ ! -z $1 ]]; then
     while [[ -z $smartnodeblsprivkey ]]; do
-      smartnodeblsprivkey=$(whiptail --inputbox "Enter your SmartNode operatorSecret key" 8 75 3>&1 1>&2 2>&3)
+      smartnodeblsprivkey=$(whiptail --inputbox "Enter your SmartNode OperatorSecret key" 8 75 3>&1 1>&2 2>&3)
     done
     return
   fi
@@ -136,17 +137,23 @@ function start_qt() {
     fi
   elif [[ ! -z $START_QT_ANS ]]; then
 clear
+ echo -e "                         Send 60000 tRTM"
  echo -e ""
+ echo -e " In wallet console check "
+ echo -e "                         smartnode outputs  = TransactionID: CollateralIndex"
  echo -e ""
+ echo -e "                         listaddressbalances = Fee address"
  echo -e ""
- echo -e "protx quick_setup cтрока из smatrnode outputs 1  IP port кошелек из listaddressbalances"
+ echo -e " This is any address in your wallet which contains enough RTM to pay the fee"
  echo -e ""
- echo -e "smartnode outputs "
+ echo -e "Your smartnode server IP and port. "
  echo -e ""
- echo -e "listaddressbalances "
+ echo -e "Fee address: This is any address in your wallet which contains enough RTM to pay the fee"
  echo -e ""
- echo -e "operatorSecret 211fc0a9ee0496c6045d0f"
+ echo -e "protx quick_setup TransactionID Collateralindex  IP:Port FeeAddress"
  echo -e ""
+ echo -e "Copy operatorSecret 211fc0a9ee0496c6045d0f... ... ..."
+ echo -e " "
 read -p "Press Enter key to start qt wallet ... "
 
 echo -e "Starting qt-wallet please be patient..."
