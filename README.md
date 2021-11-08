@@ -8,6 +8,6 @@ curl must be installed
 
 
 
-``` bash <(curl -s https://raw.githubusercontent.com/testnet3/raptoreum/main/install.sh) ```
+``` bash <(curl -s https://raw.githubusercontent.com/testnet3/RTMnode/main/install.sh) ```
 
 
