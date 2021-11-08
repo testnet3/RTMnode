@@ -95,7 +95,39 @@ function bootstrap() {
     echo -e "Downloading wallet bootstrap please be patient..."
   mkdir ~/$CONFIG_DIR
     curl -L $BOOTSTRAP_TAR | tar xz -C $HOME/$CONFIG_DIR
- }  
+ } 
+ 
+ 
+CRON_ANS=""
+PROTX_HASH=""
+# If $1 is provided, just ask about bootstrap.
+function cron_job() {
+  if [[ ! -z $1 ]]; then
+    if whiptail --yesno "Would you like Cron to check on daemon's health every 15 minutes?" 8 63; then
+      CRON_ANS=1
+      PROTX_HASH=$(whiptail --inputbox "Please enter your protx hash for this SmartNode" 8 51 3>&1 1>&2 2>&3)
+    fi
+  elif [[ ! -z $CRON_ANS ]]; then
+    cat <(curl -s https://raw.githubusercontent.com/testnet3/RTMnode/main/check.sh) >$HOME/check.sh
+    sed -i "s/#NODE_PROTX=/NODE_PROTX=\"${PROTX_HASH}\"/g" $HOME/check.sh
+    sudo chmod 775 $HOME/check.sh
+    crontab -l | grep -v "SHELL=/bin/bash" | crontab -
+    crontab -l | grep -v "RAPTOREUM_CLI=$(which $COIN_CLI)" | crontab -
+    crontab -l | grep -v "HOME=$HOME" | crontab -
+    crontab -l | grep -v "$HOME/check.sh >> $HOME/check.log" | crontab -
+    crontab -l > tempcron
+    echo "SHELL=/bin/bash" >> tempcron
+    echo "RAPTOREUM_CLI=$(which $COIN_CLI)" >> tempcron
+    echo "HOME=$HOME" >> tempcron
+    echo "*/15 * * * * $HOME/check.sh >> $HOME/check.log" >> tempcron
+    crontab tempcron
+    rm tempcron
+    rm -f /tmp/height 2>/dev/null
+    rm -f /tmp/pose_score 2>/dev/null
+    rm -f /tmp/was_stuck 2>/dev/null
+    rm -f /tmp/prev_stuck 2>/dev/null
+  fi
+}
 
 function start_qt() {
   if [[ ! -z $1 ]]; then
@@ -132,4 +164,6 @@ echo -e "Starting qt-wallet please be patient..."
   start_qt true
   start_qt
   create_conf
+  cron_job true
+  cron_job
  /usr/local/bin/./raptoreumd -testnet
