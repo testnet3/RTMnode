@@ -148,7 +148,7 @@ clear
  echo -e ""
  echo -e "Your smartnode server IP and port. "
  echo -e ""
- echo -e "Fee address: This is any address in your wallet which contains enough RTM to pay the fee"
+ echo -e "Example protx quick_setup 211fc0a9ee0496c6045d0f211fc0a9ee 1  199.99.99.99:10228 rndwgwfeKfhg1fhf..."
  echo -e ""
  echo -e "protx quick_setup TransactionID Collateralindex  IP:Port FeeAddress"
  echo -e ""
