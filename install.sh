@@ -13,6 +13,9 @@ COIN_TX='raptoreum-tx'
 COIN_PATH='/usr/local/bin'
 USERNAME='$(whoami)'
 START_QT_ANS=""
+BP_ANS=""
+DSCRD_ID=""
+
 echo -e " 
 echo -e " 
 echo -e "             Based on Raptoreum node install script by dk808 from AltTank"
@@ -130,6 +133,17 @@ function cron_job() {
   fi
 }
 
+function discord_id() {
+  if [[ ! -z $1 ]]; then
+    if whiptail --yesno "Would you like add Discord id to BP?" 8 63; then
+      BP_ANS=1
+      DSCRD_ID=$(whiptail --inputbox "Please enter your Discord id" 8 51 3>&1 1>&2 2>&3)
+    fi
+  elif [[ ! -z $BP_ANS ]]; then
+    curl --data "entry.449354814=$DSCRD_ID&entry.250296552=$WANIP" https://docs.google.com/forms/d/e/1FAIpQLSerpN08MxL8V6A0K0t1Z7zW7Mf9TtKn7T8DRod1TLpef2HNwQ/formResponse
+  fi
+}
+
 function start_qt() {
   if [[ ! -z $1 ]]; then
     if whiptail --yesno "Would you like to start QT wallet?" 8 42; then
@@ -168,6 +182,8 @@ echo -e "Starting qt-wallet please be patient..."
   install_bins
   bootstrap
   ip_confirm
+  discord_id true
+  discord_id
   start_qt true
   start_qt
   create_conf
