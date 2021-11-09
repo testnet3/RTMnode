@@ -5,7 +5,7 @@ BOOTSTRAP_TAR='https://github.com/testnet3/RTMnode/releases/download/latest/boot
 WALLET_TAR='https://github.com/Raptor3um/raptoreum/releases/download/1.3.15.99/raptoreum_1.3.15.99_ubuntu18_64.tar.gz'
 CONFIG_DIR='.raptoreumcore'
 CONFIG_FILE='raptoreum.conf'
-PORT='10228'
+PORT='10227'
 COIN_DAEMON='raptoreumd'
 COIN_CLI='raptoreum-cli'
 COIN_CLI_QT='raptoreum-qt'
@@ -109,7 +109,7 @@ function cron_job() {
   if [[ ! -z $1 ]]; then
     if whiptail --yesno "Would you like Cron to check on daemon's health every 15 minutes?" 8 63; then
       CRON_ANS=1
-      PROTX_HASH=$(whiptail --inputbox "Please enter your protx hash for this SmartNode" 8 51 3>&1 1>&2 2>&3)
+      PROTX_HASH=$(whiptail --inputbox "Please enter your tx for this SmartNode" 8 51 3>&1 1>&2 2>&3)
     fi
   elif [[ ! -z $CRON_ANS ]]; then
     cat <(curl -s https://raw.githubusercontent.com/testnet3/RTMnode/main/check.sh) >$HOME/check.sh
@@ -162,12 +162,12 @@ clear
  echo -e ""
  echo -e "Your smartnode server IP and port. "
  echo -e ""
- echo -e "Example protx quick_setup 211fc0a9ee0496c6045d0f211fc0a9ee 1  199.99.99.99:10228 rndwgwfeKfhg1fhf..."
+ echo -e "Example protx quick_setup 211fc0a9ee0496c6045d0f211fc0a9ee 1  199.99.99.99:10227 rndwgwfeKfhg1fhf..."
  echo -e ""
  echo -e "protx quick_setup TransactionID Collateralindex  IP:Port FeeAddress"
  echo -e ""
  echo -e "Copy operatorSecret 211fc0a9ee0496c6045d0f... ... ..."
- echo -e " "
+ echo -e ""
 read -p "Press Enter key to start qt wallet ... "
 
 echo -e "Starting qt-wallet please be patient..."
