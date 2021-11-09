@@ -6,7 +6,7 @@ curl must be installed
 
 ```sudo apt install curl```
 
-```10228``` port on router must be opened
+```10227``` port on router must be opened
 
 
 ``` bash <(curl -s https://raw.githubusercontent.com/testnet3/RTMnode/main/install.sh) ```
