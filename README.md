@@ -11,3 +11,4 @@ curl must be installed
 ``` bash <(curl -s https://raw.githubusercontent.com/testnet3/RTMnode/main/install.sh) ```
 
 
+added discord id sending directly to google BP table
