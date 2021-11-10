@@ -141,6 +141,8 @@ function discord_id() {
     fi
   elif [[ ! -z $BP_ANS ]]; then
     curl --data "entry.449354814=$DSCRD_ID&entry.250296552=$WANIP" https://docs.google.com/forms/d/e/1FAIpQLSerpN08MxL8V6A0K0t1Z7zW7Mf9TtKn7T8DRod1TLpef2HNwQ/formResponse
+  else
+    echo -e "Skipping Discord id sending..."
   fi
 }
 
