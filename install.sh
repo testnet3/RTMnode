@@ -189,4 +189,4 @@ echo -e "Starting qt-wallet please be patient..."
   create_conf
   cron_job true
   cron_job
- /usr/local/bin/./raptoreumd -testnet
+ /usr/local/bin/./raptoreumd -testnet --daemon
