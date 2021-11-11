@@ -15,6 +15,8 @@ USERNAME='$(whoami)'
 START_QT_ANS=""
 BP_ANS=""
 DSCRD_ID=""
+CRON_ANS=""
+PROTX_HASH=""
 
 echo -e " 
 echo -e " 
@@ -101,11 +103,7 @@ function bootstrap() {
     curl -L $BOOTSTRAP_TAR | tar xz -C $HOME/$CONFIG_DIR
  } 
  
- 
-CRON_ANS=""
-PROTX_HASH=""
-# If $1 is provided, just ask about bootstrap.
-function cron_job() {
+ function cron_job() {
   if [[ ! -z $1 ]]; then
     if whiptail --yesno "Would you like Cron to check on daemon's health every 15 minutes?" 8 63; then
       CRON_ANS=1
